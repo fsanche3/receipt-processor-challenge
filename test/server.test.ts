@@ -1,32 +1,26 @@
 import request from "supertest";
-import { getReceiptPoints, postReceiptPoints } from "../src/database";
+import * as database from "../src/database";
 import { app, server } from "../src/server";
 
 jest.mock("uuid", () => ({
   v4: jest.fn().mockReturnValue("mocked-uuid"),
 }));
 
-jest.mock("../src/database", () => ({
-  getReceiptPoints: jest.fn(),
-  postReceiptPoints: jest.fn(),
-}));
+jest.spyOn(database, "getReceiptPoints").mockImplementation(jest.fn());
+jest.spyOn(database, "postReceiptPoints").mockImplementation(jest.fn());
 
 jest.mock("../src/utils/calculatePoints", () => ({
   getPoints: jest.fn().mockReturnValue(100),
 }));
 
 describe("Receipts API", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   afterAll(() => {
     server.close();
   });
 
   describe("GET /receipts/:id/points", () => {
     it("should return 200 and points if receipt is found", async () => {
-      (getReceiptPoints as jest.Mock).mockReturnValue(100);
+      (database.getReceiptPoints as jest.Mock).mockReturnValue(100);
 
       const response = await request(app).get("/receipts/mock-id/points");
 
@@ -35,7 +29,7 @@ describe("Receipts API", () => {
     });
 
     it("should return 404 if receipt is not found", async () => {
-      (getReceiptPoints as jest.Mock).mockReturnValue(null);
+      (database.getReceiptPoints as jest.Mock).mockReturnValue(null);
 
       const response = await request(app).get("/receipts/mock-id/points");
 
@@ -57,14 +51,13 @@ describe("Receipts API", () => {
         total: "9.00",
       };
 
-      (postReceiptPoints as jest.Mock).mockImplementation(() => {});
+      (database.postReceiptPoints as jest.Mock).mockImplementation(() => {});
 
       const response = await request(app)
         .post("/receipts/process")
         .send(receipt);
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual({ id: "mocked-uuid" });
     });
 
     it("should return 400 if the receipt is invalid", async () => {

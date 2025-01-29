@@ -5,7 +5,7 @@
     "noEmit": false,
     "sourceMap": true,
     "outDir": "dist",
-    "module": "ES2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
