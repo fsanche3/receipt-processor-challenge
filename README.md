@@ -4,11 +4,11 @@ This is a backend take-home assignment for the Fetch Rewards assessment. The app
 
 # Endpoints:
 
-- POST - /receipts/process
+1. POST - /receipts/process
 - Payload: Receipt JSON
 - Response: JSON containing an id for the receipt.
 
-- GET - /receipts/{id}/points
+2. GET - /receipts/{id}/points
 - Response: A JSON object containing the number of points awarded.
 
 # How to Run the API
@@ -19,7 +19,7 @@ A Dockerfile is provided to containerize the application. The app will run on po
    `docker build -t receipt-processor-app .`
 
 2. Start the server
-   `docker run -p 3000:3000 receipt-processor-app` - This will start the server on port 3000
+   `docker run -p 3000:3000 receipt-processor-app`
 
 Alternatively, if Node.js, Typescript, and npm are installed, you can install the dependencies and run the server without Docker:
 
@@ -34,11 +34,11 @@ Once the server is running, you can interact with it using any API testing tool 
 - GET - `localhost:3000/reciepts/{id}/points`
 - POST - `localhost:3000/receipts/process`
 
-Additionally, a JSON collection is provided in the repository (Receipt-Processor-Collection) that can be imported into most API testing tools.
+Additionally, a JSON collection is provided in the repository [Receipt-Processor-Collection](https://github.com/fsanche3/receipt-processor-challenge/blob/main/Receipt-Processor-Collection.json) that can be imported into most API testing tools.
 
 # Testing
 
-Automated unit tests are executed during the Docker build process using Jest. These tests can also be run outside the container if the necessary dependencies are installed.
+Automated unit tests are executed during the Docker build process using Jest. These tests can also be ran outside the container if the necessary dependencies are installed.
 
 # Takeaways
 
