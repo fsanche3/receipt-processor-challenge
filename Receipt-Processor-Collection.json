@@ -1,0 +1,66 @@
+{
+  "info": {
+    "_postman_id": "16913a6a-60f2-46c6-97b3-b2e5421be42b",
+    "name": "Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "21936865",
+    "_collection_link": "https://www.postman.com/franksenbeans/workspace/my-workspace/collection/21936865-16913a6a-60f2-46c6-97b3-b2e5421be42b?action=share&source=collection_link&creator=21936865"
+  },
+  "item": [
+    {
+      "name": "RecieptProcessor-app",
+      "item": [
+        {
+          "name": "Get Points",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/receipts/b8791bd1-c772-4b6a-a385-71add1939a41/points",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "receipts",
+                "b8791bd1-c772-4b6a-a385-71add1939a41",
+                "points"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": null,
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Receipt",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"retailer\": \"Target\",\r\n    \"purchaseDate\": \"2022-01-02\",\r\n    \"purchaseTime\": \"13:13\",\r\n    \"total\": \"1.25\",\r\n    \"items\": [\r\n        {\"shortDescription\": \"Pepsi - 12-oz\", \"price\": \"1.25\"}\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/receipts/process",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["receipts", "process"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
